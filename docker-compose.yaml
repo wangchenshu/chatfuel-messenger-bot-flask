@@ -1,0 +1,28 @@
+version: '2'
+services:
+  web:
+    build: .
+    image: shares/server
+    container_name: flask_shares
+    ports:
+     - "3000:3000"
+    volumes:
+     - .:/app
+    links:
+     - db
+    depends_on:
+     - db
+  db:
+    container_name: flask_mysql
+    restart: always
+    image: mysql:latest
+    ports:
+      - "3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 'iamwalter'
+      MYSQL_USER: 'test'
+      MYSQL_PASS: 'pass'
+    volumes:
+      - my-datavolume:/var/lib/mysql
+volumes:
+  my-datavolume:
