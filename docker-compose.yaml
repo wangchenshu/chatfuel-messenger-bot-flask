@@ -24,5 +24,15 @@ services:
       MYSQL_PASS: 'pass'
     volumes:
       - my-datavolume:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - db:mysql
+    environment:
+      - "PMA_HOST=mysql"
+      - "PMA_USER=root"
+      - "PMA_PASSWORD=iamwalter"
+    ports:
+      - "8001:80"
 volumes:
   my-datavolume:
