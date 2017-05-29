@@ -6,12 +6,21 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 from flask import Response
+from flask import render_template
 
 import logging
 import json
 import message
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
+
+@app.route('/addpage/')
+def addpage():
+    return render_template('index.html')
+
+@app.route('/readpage/')
+def readpage():
+    return render_template('read.html')
 
 @app.route("/shares", methods=['GET', 'POST'])
 def shares():
